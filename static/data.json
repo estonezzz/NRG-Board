@@ -1,17 +1,15 @@
 {
   "CAL": "BANC - Balancing Authority of Northern California,CISO - California Independent System Operator,IID - Imperial Irrigation District,LDWP - Los Angeles Department of Water and Power,TIDC - Turlock Irrigation District",
-  "MIDW": "AECI - Associated Electric Cooperative,EEI - Electric Energy,GLHB - GridLiance,LGEE - Louisville Gas and Electric Company and Kentucky Utilities Company,MISO - Midcontinent Independent System Operator",
+  "MIDW": "AECI - Associated Electric Cooperative,LGEE - Louisville Gas and Electric Company and Kentucky Utilities Company,MISO - Midcontinent Independent System Operator",
   "TEX" : "ERCO - Electric Reliability Council of Texas",
-  "NW" : "AVA - Avista Corporation, AVRN - Avangrid Renewables,BPAT - Bonneville Power Administration, CHPD - Public Utility District No 1 of Chelan County,DOPD - PUD No 1 of Douglas County,GCPD - Public Utility District No 2 of Grant County,GRID - Gridforce Energy Management,GWA - NaturEner Power Watch,IPCO - Idaho Power Company,NEVP - Nevada Power Company,NWMT - NorthWestern Corporation,PACE - PacifiCorp East,PACW - PacifiCorp West,PGE - Portland General Electric Company,PSCO - Public Service Company of Colorado,PSEI - Puget Sound Energy,SCL - Seattle City Light,TPWR - City of Tacoma Department of Public Utilities Light Division,WACM - Western Area Power Administration Rocky Mountain Region,WAUE - Western Area Power Administration Upper Great Plains East,WAUW - Western Area Power Administration Upper Great Plains West,WWA - NaturEner Wind Watch",
+  "NW" : "AVA - Avista Corporation,BPAT - Bonneville Power Administration, CHPD - Public Utility District No 1 of Chelan County,DOPD - PUD No 1 of Douglas County,GCPD - Public Utility District No 2 of Grant County,IPCO - Idaho Power Company,NEVP - Nevada Power Company,NWMT - NorthWestern Corporation,PACE - PacifiCorp East,PACW - PacifiCorp West,PGE - Portland General Electric Company,PSCO - Public Service Company of Colorado,PSEI - Puget Sound Energy,SCL - Seattle City Light,TPWR - City of Tacoma Department of Public Utilities Light Division,WACM - Western Area Power Administration Rocky Mountain Region,WAUW - Western Area Power Administration Upper Great Plains West",
   "NY": "NYIS - New York Independent System Operator",
   "NE": "ISNE - ISO New England",
-  "CAN": "AESO - Alberta Electric System Operator,BCHA - British Columbia Hydro and Power Authority,HQT - HydroQuebec TransEnergie,IESO - Ontario IESO, MHEB - Manitoba Hydro,NBSO - New Brunswick System Operator,SPC - Saskatchewan Power Corporation",
-  "CAR" : "CPLE - Duke Energy Progress East,CPLW - Duke Energy Progress West,DUK - Duke Energy Carolinas,SC - South Carolina Public Service Authority,SCEG - South Carolina Electric & Gas Company,YAD - Alcoa Power Generating Yadkin Division",
+  "CAR" : "CPLE - Duke Energy Progress East,CPLW - Duke Energy Progress West,DUK - Duke Energy Carolinas,SC - South Carolina Public Service Authority,SCEG - South Carolina Electric & Gas Company",
   "CENT" : "SPA - Southwestern Power Administration,SWPP - Southwest Power Pool",
   "FLA" : "FMPP - Florida Municipal Power Pool, FPC - Duke Energy Florida,FPL - Florida Power & Light Co, GVL - Gainesville Regional Utilities,HST - City of Homestead,JEA - JEA,NSB - Utilities Commission of New Smyrna Beach,SEC - Seminole Electric Cooperative,TAL - City of Tallahassee,TEC - Tampa Electric Company",
-  "MEX" : "CEN - Centro Nacional de Control de Energia,CFE - Comision Federal de Electricidad",
   "MIDA" : "OVEC - Ohio Valley Electric Corporation,PJM - PJM Interconnection",
-  "SE" : "AEC - PowerSouth Energy Cooperative,SEPA - Southeastern Power Administration,SOCO - Southern Company Services",
+  "SE" : "SOCO - Southern Company Services",
   "TEN" : "TVA - Tennessee Valley Authority",
-  "SW": "AZPS - Arizona Public Service Company,DEAA - Arlington Valley, EPE - El Paso Electric Company,GRIF - Griffith Energy, GRMA - Gila River Power, HGMA - New Harquahala Generating Company, PNM - Public Service Company of New Mexico,SRP - Salt River Project Agricultural Improvement and Power District, TEPC - Tucson Electric Power,WALC - Western Area Power Administration Desert Southwest Region"
+  "SW": "AZPS - Arizona Public Service Company, EPE - El Paso Electric Company, PNM - Public Service Company of New Mexico,SRP - Salt River Project Agricultural Improvement and Power District, TEPC - Tucson Electric Power,WALC - Western Area Power Administration Desert Southwest Region"
 }

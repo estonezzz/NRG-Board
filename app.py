@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect, jsonify, url_for
 import os
 from celery import Celery
@@ -6,11 +5,6 @@ import redis
 import gc
 
 import re
-=======
-from flask import Flask, render_template, request, redirect
-from datetime import datetime, timedelta
-import numpy as np
->>>>>>> parent of a51c5e8... celery
 import requests
 import time
 from datetime import datetime, timedelta
@@ -29,7 +23,6 @@ from bokeh.models import DatetimeTickFormatter
 app = Flask(__name__)
 app.vars = {}
 
-<<<<<<< HEAD
 def make_celery(app):
     celery = Celery(
         app.import_name,
@@ -55,8 +48,6 @@ app.config.update(
 celery = make_celery(app)
 
 
-=======
->>>>>>> parent of a51c5e8... celery
 def lat_long(Name):
     locations = pd.read_csv(r"static/locations.csv")
     lat = locations.loc[locations[locations['Acronym'] == Name].index,'Lat'].values[0]
@@ -82,25 +73,27 @@ def grab_weather(station):
     df = df.astype(int)
     return df
 
-#get previous 2 days of weather from openweather service bc noaa.gov doesn't have this data    
-def weather_days(lat, long, days_ = 2):
+#get previous 2 days of weather from openweather service bc noaa.gov doesn't have this data     
+    
+def weather_days(lat, long, days_ = 5):
     days,TMIN,TMAX,SNOW,PRCP = [],[],[],[],[]
     today = datetime.today().strftime ('%Y-%m-%d')
     API_key = '32fbc02006fd2d5d57552e2c0691c1b8'
     time_ = datetime.now()
     for i in range(days_):
-        timestamp = str(int(time.time() - timedelta(days = days_, hours = time_.hour - 12, minutes = time_.minute).total_seconds()) + i * 86400)
-        url = 'http://api.openweathermap.org/data/2.5/onecall/timemachine?lat='+str(lat)+'&lon='+str(long)+'&dt='+timestamp+'&appid='+API_key
+        timestamp = str(int(time.time() - timedelta(days = days_).total_seconds()) + i * 86400)
+        url = 'http://api.openweathermap.org/data/2.5/onecall/timemachine?lat='+str(lat)+'&lon='+str(long)+'&dt='+timestamp+'&units=metric&appid='+API_key
         r = requests.get(url)
         days.append(pd.to_datetime((datetime.today()-timedelta(days = days_ - i)).date()))
-        TMIN.append(r.json()['current']['temp'])
-        TMAX.append(r.json()['current']['temp'])
-        if str.lower(r.json()['current']['weather'][0]['main']) =='rain':
-            PRCP.append(r.json()['current']['weather'][0]['rain']/254)
+        w_df = pd.DataFrame(r.json()['hourly'])
+        TMIN.append(w_df.temp.mean()*10)
+        TMAX.append(w_df.temp.mean()*10)
+        if 'rain' in w_df.columns:
+            PRCP.append(w_df['rain'].dropna().apply(lambda x: x['1h']).sum()*10)
             SNOW.append(0.0)
-        elif str.lower(r.json()['current']['weather'][0]['main']) =='snow': 
-            SNOW.append(r.json()['daily'][0]['snow']/254)
-            PRCP.append(r.json()['daily'][0]['snow']/254)
+        elif 'snow' in w_df.columns: 
+            SNOW.append(w_df['snow'].dropna().apply(lambda x: x['1h']).sum()*10)
+            PRCP.append(w_df['snow'].dropna().apply(lambda x: x['1h']).sum()*10)
         else:
             SNOW.append(0.)
             PRCP.append(0.)
@@ -129,39 +122,34 @@ def weather_forecast(Name, days = 3): # forecast for today, tomorrow and day aft
     lat, long = lat_long(Name)
     dates,TMIN,TMAX,SNOW,PRCP = [],[],[],[],[] 
     API_key = '32fbc02006fd2d5d57552e2c0691c1b8'
-    url = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + str(lat) + '&lon='+ str(long) + '&exclude=hourly,minutely&appid='+ API_key
+    url = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + str(lat) + '&lon='+ str(long) + '&exclude=hourly,minutely&units=metric&appid='+ API_key
     r = requests.get(url)
-    TMIN = [r.json()['daily'][i]['temp']['min'] for i in range(days)]
-    TMAX = [r.json()['daily'][i]['temp']['max'] for i in range(days)]
+    TMIN = [r.json()['daily'][i]['temp']['min']*10 for i in range(days)]
+    TMAX = [r.json()['daily'][i]['temp']['max']*10 for i in range(days)]
     for i in range (days):
         dates.append(pd.to_datetime((datetime.today()+timedelta(days = i)).date()))
         if str.lower(r.json()['daily'][i]['weather'][0]['main']) =='rain':
-            PRCP.append(r.json()['daily'][i]['rain'])
+            PRCP.append(r.json()['daily'][i]['rain']*10)
             SNOW.append(0.0)
         elif str.lower(r.json()['daily'][i]['weather'][0]['main']) =='snow': 
-            SNOW.append(r.json()['daily'][i]['snow'])
-            PRCP.append(r.json()['daily'][i]['snow'])
+            SNOW.append(r.json()['daily'][i]['snow']*10)
+            PRCP.append(r.json()['daily'][i]['snow']*10)
         else:
             SNOW.append(0.0)
             PRCP.append(0.0)
     df = pd.DataFrame({'Date': dates, 'TMAX': TMAX,'TMIN': TMIN,'PRCP': PRCP,'SNOW': SNOW}).set_index('Date')
     return df
     
-<<<<<<< HEAD
 def weather_transform(weather):
     #weather = weather_.copy()
     # temp is in 1/10 degC; convert to degC
-=======
-def weather_transform(weather_):
-    weather = weather_.copy()
->>>>>>> parent of a51c5e8... celery
     weather['TMIN'] /= 10
     weather['TMAX'] /= 10
     weather['TAVG'] = (weather['TMAX'] + weather['TMIN']) / 2
     weather['TAVG^2'] = weather['TAVG']**2
-    # precip is in 1/10 mm; convert to inches
-    weather['PRCP'] /= 254
-    weather['SNOW'] /= 254
+    # precip is in 1/10 mm; convert to mm
+    weather['PRCP'] /= 10
+    weather['SNOW'] /= 10
     weather['dry day'] = (weather['PRCP'] == 0).astype(int)
     weather['snowfall'] = (weather['SNOW'] != 0).astype(int)
     weather = weather.drop(['TMIN','TMAX','SNOW'], axis = 1)
@@ -181,30 +169,18 @@ def day_of_week(df_daily):
         df_daily[day] = (df_daily.index.dayofweek == i).astype(float)
     return df_daily
     
-<<<<<<< HEAD
 def rolling_year(df_daily,full_data_index_0):
     #df_daily = df.copy()
     df_daily['annual'] = (df_daily.index - full_data_index_0).days / 365
-=======
-def rolling_year(df):
-    df_daily = df.copy()
-    df_daily['annual'] = (df_daily.index - df_daily.index[0]).days / 365
->>>>>>> parent of a51c5e8... celery
     return df_daily
     
 def holidays(df_daily):
     #df_daily = df.copy()
     current_year = datetime.today().year
     cal = USFederalHolidayCalendar()
-<<<<<<< HEAD
     holidays = cal.holidays('2015', str(current_year+1))
     df_daily = df_daily.join(pd.Series(1, index=holidays, name='holiday'))
     df_daily['holiday'].fillna(0, inplace=True)
-=======
-    holidays = cal.holidays('2015', str(current_year))
-    df_daily_ = df_daily.join(pd.Series(1, index=holidays, name='holiday'))
-    df_daily_['holiday'].fillna(0, inplace=True)
->>>>>>> parent of a51c5e8... celery
     return df_daily
     
     
@@ -228,12 +204,11 @@ def var_composition(df,Name, full_data_index_0):
     #df = df_.copy()
     df = daylight(df,Name)
     df = holidays(df)
-    df = rolling_year(df)
+    df = rolling_year(df,full_data_index_0)
     df = day_of_week(df)
     df = fourier(365, df,full_data_index_0 )
     return df
     
-<<<<<<< HEAD
 def simple_imputation(df, column_name='Demand', shift = 7):
     #df = df_.copy()
     median = df[column_name].median() # median help to remove big positive outliers, it is not skewed by them
@@ -390,21 +365,6 @@ def make_hist(title, hist, edges, x, pdf):
     p.yaxis.axis_label = 'Pr(x)'
     p.grid.grid_line_color="white"
     return p
-=======
-def model_preprocess(Name):
-    lat, long = lat_long(Name)
-    df_daily = grab_EIA_data(Name,data='ALL.D.HL').resample("D").sum()# Demand data from EIA summed up by day
-    weather = weather_transform(grab_weather(station(Name)))# weather taken from gov and transformed
-    weather_add = weather_transform(weather_days(lat, long, days_ = 2))# weather from Openweather data 2 days back by defqult and up to 4 days
-    weather_tr = pd.concat([weather,weather_add])# 
-    df_daily_j = df_daily.join(weather_tr, how = 'left')
-    if df_daily_j.index[-1].date() == datetime.today().date():
-        df_daily_j = df_daily_j.drop(df_daily_j.index[-1],axis = 0)# if last row is todays date -> drop it
-    df_daily_j = var_composition(df_daily_j,Name, df_daily_j.index[0])
-    return df_daily_j
-    
-    
->>>>>>> parent of a51c5e8... celery
     
 @app.route('/', methods=['GET','POST'])
 def index():
@@ -416,7 +376,6 @@ def index():
 @app.route('/modeling', methods=['POST'])
 def modeling():    
     app.vars['regions'] = request.form['regions'].strip()
-<<<<<<< HEAD
     app.vars['authority'] = request.form['authority'].split('-')[0].strip()
     app.vars['flag'] = request.form['flag'].strip()
     if app.vars['flag'] == 'true':
@@ -507,15 +466,6 @@ def chart():
     script2, div2 = components(histogram)
     return render_template('chart.html', comment = comment,z_score = z_score_v, demand = demand_f, vars_ = app.vars['predictions'], the_div=div, the_script=script,the_div1=div1, the_script1=script1,the_div2=div2, the_script2=script2)  
 
-=======
-    app.vars['authority'] = request.form['authority'].split('-')[0].strip() 
-    EIA_data = model_preprocess(app.vars['authority']) 
-    model = arima.ARIMA((5,1,1), seasonal=False, suppress_warnings=True)    
-    model.fit(EIA_data['Demand'], EIA_data.drop('Demand',axis = 1))
-    X_ex = var_composition(weather_transform(weather_forecast(app.vars['authority'])),app.vars['authority'],EIA_data.index[0])
-    predictions = model.predict(n_periods=3, exogenous = X_ex, return_conf_int=False)
-    return render_template('chart.html', vars_ = predictions)
->>>>>>> parent of a51c5e8... celery
     
 @app.route('/about')
 def about():
