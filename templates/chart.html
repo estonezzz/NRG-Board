@@ -1,0 +1,113 @@
+
+<<<<<<< HEAD
+{{ the_script|safe }}
+
+{{ the_script1|safe }}
+
+{{ the_script2|safe }}
+
+{{ the_script3|safe }}
+
+<div class=graph>
+		<h3>Selected Stats</h3>
+			{{ the_div|safe }}
+			{{ the_div1|safe }} 
+			 <hr>
+
+		<h3>3-Day Demand Forecast</h3>			
+		<table>
+		  <tr>
+			<th>Date</th>
+			<th>Demand Forecast, MWh</th>
+			<th>Authority-based Forecast, MWh</th>
+			<th>Z-Score</th>
+			<th>Comments</th>			
+		  </tr>
+		  <tr>
+			<td>{{ vars_[0].split()[0]|safe }}</td>
+			<td>{{ vars_[0].split()[1]|safe }}</td>
+			<td>{{ demand|safe }}</td>
+			<td>{{ z_score|safe }}</td>
+			<td>{{ comment|safe }}</td>
+		  </tr>
+		  <tr>
+			<td>{{ vars_[1].split()[0]|safe }}</td>
+			<td>{{ vars_[1].split()[1]|safe }}</td>
+			<td>NA</td>
+			<td>NA</td>
+			<td>No Authority-based forecast available</td>
+		  </tr>
+		  <tr>
+			<td>{{ vars_[2].split()[0]|safe }}</td>
+			<td>{{ vars_[2].split()[1]|safe }}</td>
+			<td>NA</td>
+			<td>NA</td>
+			<td>No Authority-based forecast available</td>
+		  </tr>		
+		</table>	
+	{{ the_div2|safe }}	
+		
+  </div>
+=======
+
+
+#authority {display:none;}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #e7e7e7;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+li a.active {
+  color: white;
+  background-color: #4CAF50;
+}
+
+window.onload = function() {
+  var c = document.getElementById('Auth_flag');
+  c.onclick = function() {
+    if (c.checked == true) {document.getElementById('answer').style.display = 'inline';}
+    else {document.getElementById('answer').style.display = '';
+    }
+  }
+}
+
+
+</style>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  </head>
+  <body>
+          <ul> 
+			<li><a class="active" href="/">NRG Board</a></li>
+            <li><a target="_blank" href="https://www.thedataincubator.com">The Data Incubator</a></li>
+			<li><a target="_blank" href="https://www.eia.gov/beta/electricity/gridmonitor/dashboard/electric_overview/US48/US48">EIA GridMonitor Dashboard </a></li>			
+            <li><a href="/about">About</a></li>
+          </ul>
+		  {{ vars_|safe }}
+		  
+		  
+  </div>
+  </body>
+</html>
+>>>>>>> parent of a51c5e8... celery

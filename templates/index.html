@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/nanobar/0.4.2/nanobar.min.js"></script>
+	
+
+<<<<<<< HEAD
+	<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-2.2.1.min.js"></script>
+=======
+    <title>NRG Board</title>
+<style>
+
+
+#authority {display:none;}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #e7e7e7;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+li a.active {
+  color: white;
+  background-color: #4CAF50;
+}
+
+window.onload = function() {
+  var c = document.getElementById('Auth_flag');
+  c.onclick = function() {
+    if (c.checked == true) {document.getElementById('answer').style.display = 'inline';}
+    else {document.getElementById('answer').style.display = '';
+    }
+  }
+}
+
+
+</style>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  </head>
+  <body>
+          <ul> 
+			<li><a class="active" href="/">NRG Board</a></li>
+            <li><a target="_blank" href="https://www.thedataincubator.com">The Data Incubator</a></li>
+			<li><a target="_blank" href="https://www.eia.gov/beta/electricity/gridmonitor/dashboard/electric_overview/US48/US48">EIA GridMonitor Dashboard </a></li>			
+            <li><a href="/about">About</a></li>
+          </ul>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-left">
+          <h5 style="color:red">{{message}}</h5>
+		  <form action="/chart" method="POST">
+			   <label for="regions">Region of Interest:</label>
+
+				<select name="regions" id="regions">
+				  <option selected value="base">Please Select</option>
+				  <option value="CAL">California</option>
+				  <option value="MIDW">Midwest</option>
+				  <option value="SW">Southwest</option><
+				  <option value="NY">New York</option>
+				  <option value="NE">New England</option>
+				  <option value="CAN">Canada</option>
+				  <option value="TEX">Texas</option>
+				  <option value="NW">Northwest</option>
+				  <option value="TEN">Tennessee</option>
+				  <option value="CAR">Carolinas</option>
+				  <option value="MIDA">Midatlantic</option>
+				  <option value="FLA">Florida</option>
+				  <option value="MEX">Mexico</option>
+				  <option value="CENT">Central</option>
+				</select> <br><br>
+				<label for="Auth_flag">Specify Balancing Authority?</label>
+			    <input type="checkbox" id="Auth_flag" name="Auth_flag" value="Auth_flag">
+					<select name="authority" id="authority">
+					  <option>Please choose from above</option>
+				    </select><br><br>
+			  	<input type="submit" value="Submit">
+			 </form>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"  crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		  window.onload = function() {
+		  var c = document.getElementById('Auth_flag');
+		  c.onclick = function() {
+			if (c.checked == true) {document.getElementById('authority').style.display = 'inline';}
+			else {document.getElementById('authority').style.display = '';
+			}
+		  }
+		}
+	</script>
+	<script type="text/javascript">
+	$("#regions").change(function() {
+>>>>>>> parent of a51c5e8... celery
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
+<!--	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+<<<<<<< HEAD
+	<style>
+
+        #authority {
+            display: none;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        li a.active {
+            color: white;
+            background-color: #4CAF50;
+        }
+
+        #progress * {
+            width: 100%;
+            text-align: center;
+            color: black;
+        }
+
+        .progress * {
+            width: 100%;
+            text-align: center;
+            color: black;
+        }
+		
+		h3 {
+		
+		text-align: center;
+		}
+		
+		table {
+		  font-family: arial, sans-serif;
+		  border-collapse: collapse;
+		  width: 100%;
+		}
+
+		td, th {
+		  border: 1px solid #dddddd;
+		  text-align: left;
+		  padding: 8px;
+		}
+
+		tr:nth-child(even) {
+		  background-color: #dddddd;
+		}
+    </style>
+
+    <script type="text/javascript">
+		$(function () {
+
+			var c = document.getElementById('Auth_flag');
+			c.onclick = function () {
+				if (c.checked == true) {
+					document.getElementById('authority').style.display = 'inline';
+
+				} else {
+					document.getElementById('authority').style.display = '';
+				}
+			};
+
+			$("#regions").change(function () {
+
+				var $dropdown = $(this);
+
+				$.getJSON("{{url_for('static', filename='data.json') }}", function (data) {
+
+					var key = $dropdown.val();
+					var vals = [];
+
+					switch (key) {
+						case 'CAL':
+							vals = data.CAL.split(",");
+							break;
+						case 'MIDW':
+							vals = data.MIDW.split(",");
+							break;
+						case 'TEX':
+							vals = data.TEX.split(",");
+							break;
+						case 'SW':
+							vals = data.SW.split(",");
+							break;
+						case 'NE':
+							vals = data.NE.split(",");
+							break;
+						case 'NY':
+							vals = data.NY.split(",");
+							break;
+						case 'NW':
+							vals = data.NW.split(",");
+							break;
+						case 'TEN':
+							vals = data.TEN.split(",");
+							break;
+						case 'CAR':
+							vals = data.CAR.split(",");
+							break;
+						case 'MIDA':
+							vals = data.MIDA.split(",");
+							break;
+						case 'FLA':
+							vals = data.FLA.split(",");
+							break;
+						case 'CENT':
+							vals = data.CENT.split(",");
+							break;
+						case 'base':
+							vals = ['Please choose from above'];
+					}
+					console.log(vals);
+					var $secondChoice = $("#authority");
+					$secondChoice.empty();
+					$.each(vals, function (index, value) {
+						$secondChoice.append("<option>" + value + "</option>");
+					});
+				});
+			});
+
+			function start_long_task() {
+				// add task status elements
+				
+				if($("#Auth_flag").is(':checked')){
+					$("#Auth_flag").attr('value', "true");
+				}
+				else {
+					$("#Auth_flag").attr('value', "false");
+				}
+				var div = $('<div class="nanobar_progress"><div></div><div>0%</div><div>...</div><div>&nbsp</div></div><hr>');
+				$('#progress').html(div);
+				// create a progress bar
+				var nanobar = new Nanobar({
+					bg: '#44f',
+					target: div[0].childNodes[0]
+				});
+				// send ajax POST request to start background job
+				
+				$.ajax({
+					type: 'POST',
+					url: '/modeling',
+					data: {regions: $('#regions').val(), authority: $('#authority').val(),flag: $('#Auth_flag').val()},
+					success: function (response, status) {
+						var status_url = response['Location'];
+						console.log(status_url);
+						update_progress(status_url, nanobar, div[0]);
+					},
+					error: function (xhr) {
+						alert('Unexpected error' + xhr.status + ' ' + xhr.statusText);
+					}
+				});
+			}
+			
+			function update_progress(status_url, nanobar, status_div) {
+				// send GET request to status URL;
+				$.getJSON(status_url, function (data) {
+					// update UI
+					var obj = data;
+					console.log(obj);
+					var percent = parseInt(data['current'] * 100 / data['total']);
+					console.log(percent);
+					nanobar.go(percent);
+					console.log(status_div.childNodes[2]);
+					$(status_div.childNodes[1]).text(percent + '%');
+					$(status_div.childNodes[2]).text(data['status']);
+
+					if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
+						if ('result' in data) {
+							// show result
+							//$(status_div.childNodes[3]).text('Result: ' + data['result']);
+							//$(location).attr('href','/chart')
+							$.ajax({
+								type: 'POST',
+								url: '/chart',
+								data: JSON.stringify(data['result']),
+								contentType: 'application/json;charset=UTF-8',
+								dataType: 'html',
+								success: function (response) {
+									$("#content").html(response)
+								},
+								error: function (xhr) {
+									alert('Unexpected error' + xhr.status + ' ' + xhr.statusText);
+								}
+							});
+						} else {
+							//something unexpected happened
+							$(status_div.childNodes[3]).text('Result: ' + data['state']);
+						}
+					} else {
+						setTimeout(update_progress, 1000, status_url, nanobar, status_div);
+					}
+				});
+			}
+
+			$('#submit_button').click(start_long_task);
+		})
+
+    </script>
+
+    <title>NRG Board</title>
+</head>
+<body>
+<ul>
+    <li><a class="active" href="/">NRG Board</a></li>
+    <li><a target="_blank" href="https://www.thedataincubator.com">The Data Incubator</a></li>
+    <li><a target="_blank"
+           href="https://www.eia.gov/beta/electricity/gridmonitor/dashboard/electric_overview/US48/US48">EIA GridMonitor
+        Dashboard </a></li>
+    <li><a href="/about">About</a></li>
+</ul>
+
+<div class="container">
+    <h5 style="color:red">{{message}}</h5>
+    <form method='POST'>
+        <label for="regions">Region of Interest:</label>
+
+        <select name="regions" id="regions">
+            <option selected value="base">Please Select</option>
+            <option value="CAL">California</option>
+            <option value="MIDW">Midwest</option>
+            <option value="SW">Southwest</option>
+            <option value="NY">New York</option>
+            <option value="NE">New England</option>
+            <option value="TEX">Texas</option>
+            <option value="NW">Northwest</option>
+            <option value="TEN">Tennessee</option>
+            <option value="CAR">Carolinas</option>
+            <option value="MIDA">Midatlantic</option>
+            <option value="FLA">Florida</option>
+            <option value="CENT">Central</option>
+        </select> <br><br>
+        <label for="Auth_flag">Specify Balancing Authority?</label>
+        <input type="checkbox" id="Auth_flag" name="Auth_flag" value="false">
+        <select name="authority" id="authority">
+            <option>Please choose from above</option>
+        </select><br><br>
+        <!--Submit Button-->
+        <!--<button id="submit_button">Submit</button><br><br><br> -->
+        <input type="button" name="acceptRules" id="submit_button" value="Submit"><br>
+    </form>
+    <div id="progress"></div>
+	<div id="content"></div>
+
+</div>
+
+</body>
+=======
+	$.getJSON("{{url_for('static', filename='data.json') }}", function(data) {
+	
+		var key = $dropdown.val();
+		var vals = [];
+							
+		switch(key) {
+			case 'CAL':
+				vals = data.CAL.split(",");
+				break;
+			case 'MIDW':
+				vals = data.MIDW.split(",");
+				break;
+			case 'TEX':
+				vals = data.TEX.split(",");
+				break;
+			case 'SW':
+				vals = data.SW.split(",");
+				break;
+			case 'NE':
+				vals = data.NE.split(",");
+				break;
+			case 'NY':
+				vals = data.NY.split(",");
+				break;
+			case 'NW':
+				vals = data.NW.split(",");
+				break;
+			case 'TEN':
+				vals = data.TEN.split(",");
+				break;
+			case 'CAN':
+				vals = data.CAN.split(",");
+				break;
+			case 'CAR':
+				vals = data.CAR.split(",");
+				break;
+			case 'MIDA':
+				vals = data.MIDA.split(",");
+				break;
+			case 'MEX':
+				vals = data.MEX.split(",");
+				break;
+			case 'FLA':
+				vals = data.FLA.split(",");
+				break;
+			case 'CENT':
+				vals = data.CENT.split(",");
+				break;
+			case 'base':
+				vals = ['Please choose from above'];
+		}
+		console.log(vals)
+		var $secondChoice = $("#authority");
+		$secondChoice.empty();
+		$.each(vals, function(index, value) {
+			$secondChoice.append("<option>" + value + "</option>");
+		});
+
+	});
+});
+
+</script>
+
+  </body>
+>>>>>>> parent of a51c5e8... celery
+</html>
